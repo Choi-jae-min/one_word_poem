@@ -18,7 +18,6 @@ class _AnimationCardState extends State<AnimationCard> {
         children: [
           Image.asset(
             'assets/animations/hari.webp',
-            fit: BoxFit.contain,
           ),
           const Positioned(
             top: 0,

@@ -32,7 +32,10 @@ class _IndexPageState extends State<IndexPage> {
             children: [
               AnimationCard(),
               Expanded(
-                child: LatterBox(),
+                child: Transform.translate(
+                  offset: const Offset(0, -20),
+                  child: const LatterBox(),
+                ),
               ),
             ],
           ),

@@ -49,7 +49,7 @@ class _LatterBoxState extends State<LatterBox> {
             fit: BoxFit.fill
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 30, 20, 38),
+            padding: const EdgeInsets.fromLTRB(30, 30, 30, 38),
             child: ListView(
               physics: const ClampingScrollPhysics(),
               children: [
@@ -95,6 +95,7 @@ class _LatterBoxState extends State<LatterBox> {
                     ),
                     TopicCard(topic: "비 오늘날 하늘"),
                     DefaultTextField(textTitle: "시 제목",hintText: "제목을 적어주세요", maxLength: 20, controller: _titleController),
+
                     TextArea(textTitle:"시 쓰기" ,hintText: "여기에 마음을 적어보세요", maxLength: 120),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10,6,10,10),
@@ -114,6 +115,14 @@ class _LatterBoxState extends State<LatterBox> {
                 ),
               ],
             ),
+          ),
+          Positioned(
+              top: 5,
+              left: -2,
+              child: Image.asset(
+                width: 100,
+                'assets/articles/tape.png',
+              )
           ),
         ],
       ),

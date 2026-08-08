@@ -7,7 +7,8 @@ class TextArea extends StatefulWidget {
   final String textTitle;
   final int maxLength;
 
-  const TextArea({super.key,
+  const TextArea({
+    super.key,
     required this.hintText,
     required this.textTitle,
     required this.maxLength,
@@ -18,6 +19,18 @@ class TextArea extends StatefulWidget {
 }
 
 class _TextAreaState extends State<TextArea> {
+  static const _fontSize = 16.0;
+  static const _lineHeight = 40.0;
+  static const _textTopPadding = 20.0;
+  static const _firstLineY = 57.0;
+  final _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,33 +45,45 @@ class _TextAreaState extends State<TextArea> {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: const Color(0xFFE4D8C8),
-                  width: 1.5,
-                ),
+                border: Border.all(color: const Color(0xFFE4D8C8), width: 1.5),
               ),
               child: Stack(
                 children: [
                   Positioned.fill(
                     child: CustomPaint(
-                      painter: LinedPaperPainter(),
+                      painter: LinedPaperPainter(
+                        firstLineY: _firstLineY,
+                        lineSpacing: _lineHeight,
+                        scrollController: _scrollController,
+                      ),
                     ),
                   ),
 
                   // 입력 영역
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 20, 24, 12),
+                    padding: const EdgeInsets.fromLTRB(
+                      24,
+                      _textTopPadding,
+                      24,
+                      12,
+                    ),
                     child: TextField(
+                      scrollController: _scrollController,
                       cursorHeight: 22,
                       maxLength: widget.maxLength,
                       maxLines: null,
                       expands: true,
                       textAlignVertical: TextAlignVertical.top,
                       style: const TextStyle(
-                        fontSize: 16,
-                        height: 2.5,
+                        fontSize: _fontSize,
+                        height: _lineHeight / _fontSize,
                         fontWeight: FontWeight.w400,
                         color: Color(0xFF493326),
+                      ),
+                      strutStyle: const StrutStyle(
+                        fontSize: _fontSize,
+                        height: _lineHeight / _fontSize,
+                        forceStrutHeight: true,
                       ),
                       decoration: InputDecoration(
                         border: InputBorder.none,

@@ -1,7 +1,15 @@
 import 'package:flutter/cupertino.dart';
 
 class LinedPaperPainter extends CustomPainter {
-  const LinedPaperPainter();
+  LinedPaperPainter({
+    required this.firstLineY,
+    required this.lineSpacing,
+    required this.scrollController,
+  }) : super(repaint: scrollController);
+
+  final double firstLineY;
+  final double lineSpacing;
+  final ScrollController scrollController;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -10,16 +18,15 @@ class LinedPaperPainter extends CustomPainter {
       ..strokeWidth = 1;
 
     const horizontalPadding = 24.0;
-    const firstLineY = 57.0;
-    const lineSpacing = 40.0;
     const dashWidth = 2.0;
     const dashGap = 3.0;
 
-    for (
-    double y = firstLineY;
-    y < size.height - 40;
-    y += lineSpacing
-    ) {
+    final scrollOffset = scrollController.hasClients
+        ? scrollController.offset
+        : 0.0;
+    final firstVisibleLineY = firstLineY - (scrollOffset % lineSpacing);
+
+    for (double y = firstVisibleLineY; y < size.height - 40; y += lineSpacing) {
       double x = horizontalPadding;
 
       while (x < size.width - horizontalPadding) {
@@ -41,5 +48,9 @@ class LinedPaperPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant LinedPaperPainter oldDelegate) => false;
+  bool shouldRepaint(covariant LinedPaperPainter oldDelegate) {
+    return firstLineY != oldDelegate.firstLineY ||
+        lineSpacing != oldDelegate.lineSpacing ||
+        scrollController != oldDelegate.scrollController;
+  }
 }

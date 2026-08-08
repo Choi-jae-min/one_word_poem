@@ -15,7 +15,7 @@ class LatterFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const menuHeight = 70.0;
-    const footerBackgroundColor = Color.fromRGBO(250, 240, 230, 1);
+    const footerBackgroundColor = Color.fromRGBO(250, 255, 230, 1);
 
     return SizedBox(
       width: double.infinity,

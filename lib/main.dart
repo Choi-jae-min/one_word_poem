@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_word_poem/pages/index_page.dart';
+import 'package:one_word_poem/pages/latter_page.dart';
 
 void main() {
   runApp(const MyApp());
